@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Pool = void 0;
-var sequelize_1 = require("sequelize");
-var Pool = /** @class */ (function () {
+const sequelize_1 = require("sequelize");
+class Pool {
     /**
      * host port database user password
      * @param config 数据库连接配置
      */
-    function Pool(config) {
+    constructor(config) {
         if (Pool.instance == null) {
             Pool.instance = this.initPool(config);
         }
@@ -16,7 +16,7 @@ var Pool = /** @class */ (function () {
      * 初始化连接池
      * @param config 配置
      */
-    Pool.prototype.initPool = function (config) {
+    initPool(config) {
         return new sequelize_1.Sequelize(config.database, config.user, config.password, {
             host: config.host,
             port: config.port,
@@ -25,13 +25,13 @@ var Pool = /** @class */ (function () {
             dialect: config.dialect,
             define: { underscored: true },
         });
-    };
+    }
     /**
      * 定义模型，自动为每一个模型设置 主键、created、modified
      * @param modelName 模型名
      * @param attributes 属性
      */
-    Pool.prototype.defineModel = function (modelName, attributes) {
+    defineModel(modelName, attributes) {
         // 默认添加三个字段
         if (!attributes.id) {
             attributes.id = {
@@ -59,8 +59,8 @@ var Pool = /** @class */ (function () {
             underscored: false,
             hooks: {
                 /// 创建/修改 时间变动
-                beforeValidate: function (obj) {
-                    var now = Date.now();
+                beforeValidate: (obj) => {
+                    let now = Date.now();
                     if (obj.isNewRecord) {
                         obj.created = now;
                         obj.modified = now;
@@ -71,7 +71,7 @@ var Pool = /** @class */ (function () {
                 },
             },
         });
-    };
-    return Pool;
-}());
+    }
+}
 exports.Pool = Pool;
+//# sourceMappingURL=pool.js.map
