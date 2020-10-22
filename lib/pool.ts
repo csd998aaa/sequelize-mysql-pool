@@ -62,7 +62,7 @@ export class Pool {
     // 默认添加三个字段
     if (!attributes.id) {
       attributes.id = {
-        type: DataTypes.UUIDV4,
+        type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
         defaultValue: UUIDV4,
