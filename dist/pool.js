@@ -35,7 +35,7 @@ class Pool {
         // 默认添加三个字段
         if (!attributes.id) {
             attributes.id = {
-                type: sequelize_1.DataTypes.UUIDV4,
+                type: sequelize_1.DataTypes.UUID,
                 allowNull: false,
                 primaryKey: true,
                 defaultValue: sequelize_1.UUIDV4,
